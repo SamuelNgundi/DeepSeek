@@ -1,3 +1,57 @@
+/* Beautiful Read More About Us button in Our Story section */
+.read-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  background: linear-gradient(90deg, var(--banana-yellow) 60%, var(--warm-orange) 100%);
+  color: var(--primary-green);
+  font-weight: 600;
+  font-size: 1.08em;
+  padding: 0.7em 1.5em;
+  border-radius: 32px;
+  box-shadow: 0 4px 18px 0 rgba(247,195,64,0.13), 0 2px 8px rgba(0,77,26,0.07);
+  text-decoration: none;
+  margin: 1em 0 0.7em 0.2em;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  border: none;
+  outline: none;
+}
+.read-more-btn:hover, .read-more-btn:focus {
+  background: linear-gradient(90deg, var(--warm-orange) 60%, var(--banana-yellow) 100%);
+  color: var(--white);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px) scale(1.04);
+  text-decoration: none;
+}
+.read-more-btn i {
+  font-size: 1.1em;
+  color: var(--primary-green);
+  transition: color 0.2s;
+}
+.read-more-btn:hover i, .read-more-btn:focus i {
+  color: var(--white);
+}
+.wamuchomba-img-container {
+  margin: 1.2rem auto 1.6rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+}
+.wamuchomba-img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  object-fit: cover;
+}
+.wamuchomba-caption {
+  margin-top: 0.5rem;
+  font-size: 1.13em;
+  color: var(--accent-green);
+  font-weight: 600;
+  text-align: center;
+}
 /* Project Card Images - Make images fit nicely in cards */
 .project-img {
   width: 100%;
@@ -121,6 +175,7 @@ section {
   text-align: center;
   color: var(--white);
   overflow: hidden;
+  padding-top: 110px; /* Prevent navbar overlap, matches .logo img height + padding */
 }
 
 .hero-bg {
@@ -139,7 +194,7 @@ section {
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(0,77,26,0.7) 0%, rgba(0,77,26,0.2) 100%);
+  background: linear-gradient(135deg, rgba(0, 77, 26, 0.479) 0%, rgba(0, 77, 26, 0.041) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -726,7 +781,7 @@ footer {
 
 @media (max-width: 768px) {
   .fullscreen-hero {
-    padding-top: 80px;
+    padding-top: 120px;
   }
   
   .hero-content {
