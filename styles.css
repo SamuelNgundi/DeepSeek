@@ -175,7 +175,7 @@ section {
   text-align: center;
   color: var(--white);
   overflow: hidden;
-  padding-top: 110px; /* Prevent navbar overlap, matches .logo img height + padding */
+  padding-top: 80px; /* Prevent navbar overlap, matches .logo img height + padding */
 }
 
 .hero-bg {

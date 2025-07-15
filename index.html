@@ -30,6 +30,7 @@
                 <li><a href="#story" class="nav-link animate__animated animate__fadeInDown">Our Story</a></li>
                 <li><a href="#projects" class="nav-link animate__animated animate__fadeInDown">Projects</a></li>
                 <li><a href="#impact" class="nav-link animate__animated animate__fadeInDown">Impact</a></li>
+                <li><a href="gallery.html" class="nav-link animate__animated animate__fadeInDown">Gallery</a></li>
                 <li><a href="#contact" class="nav-link animate__animated animate__fadeInDown">Get Involved</a></li>
             </ul>
             <div class="hamburger animate__animated animate__fadeInRight">
@@ -161,6 +162,62 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Gallery Teaser Section -->
+        <section class="gallery-teaser-section animate-on-scroll" style="background: var(--light-bg); padding: 4.5rem 0 3.5rem 0;">
+        <section class="gallery-teaser-section animate-on-scroll" style="background: var(--light-bg); padding: 4.5rem 0 3.5rem 0;">
+            <div class="container" style="max-width: 1400px;">
+                <h2 class="section-title animate__animated animate__fadeInUp" style="text-align:center; margin-bottom:2.2rem; font-size:2.4rem; color:var(--primary-green); letter-spacing:0.5px;">Explore Our Gallery</h2>
+                <div class="gallery-teaser-grid" style="display:grid; grid-template-columns: repeat(4, 1fr); gap:2.5rem; max-width:100%; margin:0 auto;">
+                    <a href="gallery.html" class="gallery-teaser-link animate__animated animate__zoomIn" data-img="images/hero1.jpg" data-alt="Banana Farm" style="overflow:hidden; border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,0.10); transition:transform 0.3s; background:#fff;">
+                        <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250714-WA0002.jpg?updatedAt=1752597877619" alt="Banana Farm" class="gallery-teaser-img" style="width:100%; aspect-ratio:16/9; object-fit:cover; min-height:180px; max-height:260px; transition:transform 0.3s;">
+                    </a>
+                    <a href="gallery.html" class="gallery-teaser-link animate__animated animate__zoomIn" data-img="images/projects/banana-farming.jpg" data-alt="Smart Banana Farming" style="overflow:hidden; border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,0.10); transition:transform 0.3s; background:#fff; animation-delay:0.1s;">
+                        <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0006.jpg?updatedAt=1752597859046" alt="Smart Banana Farming" class="gallery-teaser-img" style="width:100%; aspect-ratio:16/9; object-fit:cover; min-height:180px; max-height:260px; transition:transform 0.3s;">
+                    </a>
+                    <a href="gallery.html" class="gallery-teaser-link animate__animated animate__zoomIn" data-img="images/projects/fibre-textiles.jpg" data-alt="Fibre Extraction" style="overflow:hidden; border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,0.10); transition:transform 0.3s; background:#fff; animation-delay:0.2s;">
+                        <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0003.jpg?updatedAt=1752597859086" alt="Fibre Extraction" class="gallery-teaser-img" style="width:100%; aspect-ratio:16/9; object-fit:cover; min-height:180px; max-height:260px; transition:transform 0.3s;">
+                    </a>
+                    <a href="gallery.html" class="gallery-teaser-link animate__animated animate__zoomIn" data-img="images/Wamuchomba_Gathoni.jpg" data-alt="Hon. Gathoni Wamuchomba" style="overflow:hidden; border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,0.10); transition:transform 0.3s; background:#fff; animation-delay:0.3s;">
+                        <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0011.jpg?updatedAt=1752597863442" alt="Hon. Gathoni Wamuchomba" class="gallery-teaser-img" style="width:100%; aspect-ratio:16/9; object-fit:cover; min-height:180px; max-height:260px; transition:transform 0.3s;">
+                    </a>
+                </div>
+                <div style="text-align:center; margin-top:2.7rem;">
+                    <a href="gallery.html" class="btn btn-green animate__animated animate__fadeInUp" style="font-size:1.18rem; padding:1em 2.6em; border-radius:32px; box-shadow:0 6px 24px rgba(0,0,0,0.10); font-weight:600; letter-spacing:0.5px;">
+                        <i class="fas fa-images" style="margin-right:0.7em;"></i>View Full Gallery <i class="fas fa-arrow-right" style="margin-left:0.7em;"></i>
+                    </a>
+                </div>
+            </div>
+            <style>
+                @media (max-width: 900px) {
+                    .gallery-teaser-grid {
+                        grid-template-columns: repeat(2, 1fr) !important;
+                        gap: 1.5rem !important;
+                    }
+                }
+                @media (max-width: 600px) {
+                    .gallery-teaser-grid {
+                        grid-template-columns: 1fr !important;
+                        gap: 1.1rem !important;
+                    }
+                    .gallery-teaser-img {
+                        min-height: 140px !important;
+                        max-height: 180px !important;
+                        border-radius: 12px !important;
+                    }
+                    .gallery-teaser-section {
+                        padding: 2.2rem 0 1.5rem 0 !important;
+                    }
+                }
+                .gallery-teaser-link:hover .gallery-teaser-img {
+                    transform: scale(1.06) rotate(-1deg);
+                    box-shadow: 0 12px 36px rgba(0,0,0,0.13);
+                }
+                .gallery-teaser-link:focus {
+                    outline: 2px solid var(--banana-yellow);
+                }
+            </style>
         </section>
 
         <!-- Impact Highlights Section -->

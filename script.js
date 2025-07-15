@@ -1,4 +1,106 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Gallery modal logic for gallery.html
+    const galleryLinks = document.querySelectorAll('.gallery-link');
+    const galleryModal = document.getElementById('gallery-modal');
+    const galleryModalImg = document.getElementById('gallery-modal-img');
+    const galleryModalClose = document.getElementById('gallery-modal-close');
+    const galleryModalPrev = document.getElementById('gallery-modal-prev');
+    const galleryModalNext = document.getElementById('gallery-modal-next');
+
+    // Array of images and alt text for navigation
+    const galleryImages = [
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250714-WA0003.jpg?updatedAt=1752597878323', alt: 'Bananas' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0017.jpg?updatedAt=1752597866229', alt: 'Farmers Training' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0007.jpg?updatedAt=1752597870855', alt: 'Banana Ripening Centre' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250713-WA0005.jpg?updatedAt=1752597875338', alt: 'Smart Banana Farming' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250714-WA0004.jpg?updatedAt=1752597879703', alt: 'Fibre Extraction' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0002.jpg?updatedAt=1752597858575', alt: 'Ripening Centre' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250713-WA0003.jpg?updatedAt=1752597873095', alt: 'Sustainability' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0008.jpg?updatedAt=1752597871373', alt: 'Hon. Gathoni Wamuchomba' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0006.jpg?updatedAt=1752597870309', alt: '' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0005.jpg?updatedAt=1752597869555', alt: '' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0004.jpg?updatedAt=1752597868462', alt: '' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0003.jpg?updatedAt=1752597867998', alt: '' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0018.jpg?updatedAt=1752597866529', alt: '' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0019.jpg?updatedAt=1752597866505', alt: '' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0009.jpg?updatedAt=1752597859014', alt: '' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0009.jpg?updatedAt=1752597872404', alt: '' }
+    ];
+    let currentIndex = 0;
+
+    function showGalleryModal(index) {
+        currentIndex = index;
+        galleryModalImg.src = galleryImages[index].src;
+        galleryModalImg.alt = galleryImages[index].alt;
+        galleryModal.style.display = 'flex';
+    }
+
+    if (galleryLinks.length && galleryModal && galleryModalImg && galleryModalClose && galleryModalPrev && galleryModalNext) {
+        galleryLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const idx = parseInt(this.getAttribute('data-index'));
+                showGalleryModal(idx);
+            });
+        });
+        galleryModalClose.addEventListener('click', function() {
+            galleryModal.style.display = 'none';
+            galleryModalImg.src = '';
+        });
+        galleryModal.addEventListener('click', function(e) {
+            if (e.target === galleryModal) {
+                galleryModal.style.display = 'none';
+                galleryModalImg.src = '';
+            }
+        });
+        galleryModalPrev.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            showGalleryModal(currentIndex);
+        });
+        galleryModalNext.addEventListener('click', function(e) {
+            e.stopPropagation();
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            showGalleryModal(currentIndex);
+        });
+        document.addEventListener('keydown', function(e) {
+            if (galleryModal.style.display === 'flex') {
+                if (e.key === 'ArrowLeft') {
+                    galleryModalPrev.click();
+                } else if (e.key === 'ArrowRight') {
+                    galleryModalNext.click();
+                } else if (e.key === 'Escape') {
+                    galleryModalClose.click();
+                }
+            }
+        });
+    }
+    // Gallery teaser modal logic
+    const teaserLinks = document.querySelectorAll('.gallery-teaser-link');
+    const modal = document.getElementById('gallery-modal');
+    const modalImg = document.getElementById('gallery-modal-img');
+    const modalClose = document.getElementById('gallery-modal-close');
+
+    if (teaserLinks.length && modal && modalImg && modalClose) {
+        teaserLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                modalImg.src = this.getAttribute('data-img');
+                modalImg.alt = this.getAttribute('data-alt');
+                modal.style.display = 'flex';
+            });
+        });
+        modalClose.addEventListener('click', function() {
+            modal.style.display = 'none';
+            modalImg.src = '';
+        });
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                modalImg.src = '';
+            }
+        });
+    }
     // Mobile menu toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');

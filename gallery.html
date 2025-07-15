@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | BanSoko</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/svg+xml" href="images/Logo/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="images/Logo/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+      /* Gallery-specific styles for beautiful grid and animation */
+      .gallery-section {
+        background: var(--light-bg);
+        padding: 4rem 0 2.5rem 0;
+      }
+      .gallery-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--primary-green);
+        margin-bottom: 2.2rem;
+        position: relative;
+      }
+      .gallery-title::after {
+        content: '';
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90px;
+        height: 4px;
+        background: var(--banana-yellow);
+        border-radius: 2px;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2.2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .gallery-card {
+        background: var(--white);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+        overflow: hidden;
+        transition: var(--transition);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: fadeInUp 1.2s cubic-bezier(0.175,0.885,0.32,1.275);
+      }
+      .gallery-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+      }
+      .gallery-img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        height: auto;
+        min-height: 340px;
+        max-height: 480px;
+        object-fit: cover;
+        border-bottom: 2px solid var(--banana-yellow);
+        transition: filter 0.3s;
+        max-width: 100%;
+        border-radius: 0;
+        background: #f7f7f7;
+        display: block;
+      }
+      .gallery-card:hover .gallery-img {
+        filter: brightness(0.93) saturate(1.15);
+      }
+      .gallery-caption {
+        padding: 1.1rem 1.2rem 0.7rem 1.2rem;
+        text-align: center;
+        font-size: 1.08rem;
+        color: var(--primary-green);
+        font-weight: 500;
+      }
+      @media (max-width: 700px) {
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        .gallery-img {
+          aspect-ratio: 16/9;
+          height: auto;
+          border-radius: 10px;
+        }
+        .gallery-title { font-size: 2rem; }
+      }
+      @media (max-width: 480px) {
+        .gallery-img {
+          aspect-ratio: 16/9;
+          height: auto;
+        }
+      }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo animate__animated animate__fadeInLeft">
+                <a href="index.html">
+                    <img src="images/Logo/logo.png" alt="BanSoko Logo">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+                <li><a href="projects.html" class="nav-link">Projects</a></li>
+                <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+                <li><a href="index.html#impact" class="nav-link">Impact</a></li>
+                <li><a href="index.html#contact" class="nav-link">Get Involved</a></li>
+            </ul>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+    <main style="margin-top: 110px;">
+      <section class="gallery-section animate-on-scroll">
+        <h1 class="gallery-title animate__animated animate__fadeInUp">Gallery</h1>
+        <div class="gallery-grid">
+          <div class="gallery-card animate__animated animate__fadeInUp">
+            <a href="#" class="gallery-link" data-index="0">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250714-WA0003.jpg?updatedAt=1752597878323" alt="Banana Farm" class="gallery-img">
+            </a>
+            <div class="gallery-caption">Banana</div>
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.15s;">
+            <a href="#" class="gallery-link" data-index="1">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0017.jpg?updatedAt=1752597866229" alt="Farmers Training" class="gallery-img">
+            </a>
+            <div class="gallery-caption">Farmers Training Session</div>
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.3s;">
+            <a href="#" class="gallery-link" data-index="2">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0007.jpg?updatedAt=1752597870855" alt="Banana Ripening Centre" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Modern Banana Ripening Centre</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.45s;">
+            <a href="#" class="gallery-link" data-index="3">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250713-WA0005.jpg?updatedAt=1752597875338" alt="Smart Banana Farming" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Smart Banana Farming Techniques</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.6s;">
+            <a href="#" class="gallery-link" data-index="4">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250714-WA0004.jpg?updatedAt=1752597879703" alt="Fibre Extraction" class="gallery-img">
+            </a>
+            <div class="gallery-caption">Fibre Extraction & Textile Production</div>
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.75s;">
+            <a href="#" class="gallery-link" data-index="5">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0002.jpg?updatedAt=1752597858575" alt="Ripening Centre" class="gallery-img">
+            </a>
+            <div class="gallery-caption">Banana Ripening Centre Operations</div>
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="6">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250713-WA0003.jpg?updatedAt=1752597873095" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="7">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0008.jpg?updatedAt=1752597871373" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="8">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0006.jpg?updatedAt=1752597870309" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="9">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0005.jpg?updatedAt=1752597869555" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="10">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0004.jpg?updatedAt=1752597868462" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="11">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0003.jpg?updatedAt=1752597867998" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="12">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0018.jpg?updatedAt=1752597866529" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="13">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0019.jpg?updatedAt=1752597866505" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:0.9s;">
+            <a href="#" class="gallery-link" data-index="14">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0009.jpg?updatedAt=1752597859014" alt="Sustainability" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Sustainability Practices in Action</div> -->
+          </div>
+          <div class="gallery-card animate__animated animate__fadeInUp" style="animation-delay:1.05s;">
+            <a href="#" class="gallery-link" data-index="14">
+              <img src="https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0009.jpg?updatedAt=1752597872404" alt="Hon. Gathoni Wamuchomba" class="gallery-img">
+            </a>
+            <!-- <div class="gallery-caption">Hon. Gathoni Wamuchomba - Visionary Leader</div> -->
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Gallery Modal -->
+    <div id="gallery-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); z-index:9999; align-items:center; justify-content:center;">
+      <span id="gallery-modal-close" style="position:absolute; top:32px; right:38px; font-size:2.5rem; color:#fff; cursor:pointer; z-index:10001;">&times;</span>
+      <img id="gallery-modal-img" src="" alt="" style="max-width:90vw; max-height:80vh; border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,0.18);">
+      <button id="gallery-modal-prev" style="position:absolute; left:24px; top:50%; transform:translateY(-50%); font-size:2.2rem; color:#fff; background:none; border:none; cursor:pointer; z-index:10001; padding:0 0.5em;">&#8592;</button>
+      <button id="gallery-modal-next" style="position:absolute; right:24px; top:50%; transform:translateY(-50%); font-size:2.2rem; color:#fff; background:none; border:none; cursor:pointer; z-index:10001; padding:0 0.5em;">&#8594;</button>
+    </div>
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul class="footer-links-list">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="projects.html">Our Projects</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
+              <li><a href="index.html#impact">Impact</a></li>
+              <li><a href="#">Resources</a></li>
+              <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Contact Us</h4>
+            <ul class="footer-contact-list">
+              <li>📍 BanSOKO Centre, Wataalam Ruiru<br><span style="font-size:0.97em; color:var(--banana-yellow);">P.O Box 2112-00900</span></li>
+              <li>📞 <a href="tel:+254708924404">+254 708 924 404</a></li>
+              <li>📧 <a href="mailto:bansokoofficial@gmail.com">bansokoofficial@gmail.com</a></li>
+              <li>💬 <a href="https://wa.me/254708924404" target="_blank">WhatsApp</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Downloads</h4>
+            <ul class="footer-downloads-list">
+              <li><a href="#">Banana Farming Guide</a></li>
+              <li><a href="#">Banana Varieties Sheet</a></li>
+              <li><a href="#">BanSoko Project Concept Paper</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Follow Us</h4>
+            <div class="footer-social-links">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i> Facebook</a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i> Twitter</a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i> Instagram</a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </div>
+          </div>
+          <div class="footer-section newsletter-section">
+            <h4>Join Our Newsletter</h4>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+              <input type="email" placeholder="Enter your email address" required>
+              <button type="submit" class="btn btn-green">Subscribe</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-legal">
+          <div class="footer-legal-left">&copy; 2025 BanSoko Initiative. All rights reserved.</div>
+          <div class="footer-legal-right">
+            <a href="#" style="margin-right:1.2rem; color:var(--banana-yellow);">Terms &amp; Conditions</a>
+            <a href="#" style="color:var(--banana-yellow);">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
