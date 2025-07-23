@@ -1,5 +1,43 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Gallery modal logic for gallery.html
+    // Animate on scroll for gallery teaser images
+    const galleryTeaserLinks = document.querySelectorAll('.gallery-teaser-link.animate-on-scroll');
+    if (galleryTeaserLinks.length) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        galleryTeaserLinks.forEach(link => {
+            observer.observe(link);
+        });
+    }
+
+    // Keyboard accessibility for gallery teaser images
+    galleryTeaserLinks.forEach(link => {
+        link.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                link.click();
+            }
+        });
+    });
+    // Animate on scroll for project cards (moved from index.html)
+    const projectCards = document.querySelectorAll('.project-card.animate-on-scroll');
+    if (projectCards.length) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+        projectCards.forEach(card => {
+            observer.observe(card);
+        });
+    }
+    // ...existing code...
     const galleryLinks = document.querySelectorAll('.gallery-link');
     const galleryModal = document.getElementById('gallery-modal');
     const galleryModalImg = document.getElementById('gallery-modal-img');
