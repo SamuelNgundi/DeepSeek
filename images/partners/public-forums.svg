@@ -1,0 +1,6 @@
+<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+  <rect width="60" height="60" fill="#f8f8f8"/>
+  <text x="30" y="25" font-family="Arial" font-size="7" text-anchor="middle" fill="#004d1a">PUBLIC</text>
+  <text x="30" y="35" font-family="Arial" font-size="7" text-anchor="middle" fill="#004d1a">PARTICIPATION</text>
+  <path d="M20,40 L40,40 L30,50 Z" fill="#004d1a"/>
+</svg>

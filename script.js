@@ -15,14 +15,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Keyboard accessibility for gallery teaser images
-    galleryTeaserLinks.forEach(link => {
-        link.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                link.click();
-            }
+    if (galleryTeaserLinks.length) {
+        galleryTeaserLinks.forEach(link => {
+            link.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    link.click();
+                }
+            });
         });
-    });
+    }
     // Animate on scroll for project cards (moved from index.html)
     const projectCards = document.querySelectorAll('.project-card.animate-on-scroll');
     if (projectCards.length) {
@@ -55,14 +57,14 @@ document.addEventListener('DOMContentLoaded', function() {
         { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0002.jpg?updatedAt=1752597858575', alt: 'Ripening Centre' },
         { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250713-WA0003.jpg?updatedAt=1752597873095', alt: 'Sustainability' },
         { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0008.jpg?updatedAt=1752597871373', alt: 'Hon. Gathoni Wamuchomba' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0006.jpg?updatedAt=1752597870309', alt: '' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0005.jpg?updatedAt=1752597869555', alt: '' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0004.jpg?updatedAt=1752597868462', alt: '' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0003.jpg?updatedAt=1752597867998', alt: '' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0018.jpg?updatedAt=1752597866529', alt: '' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0019.jpg?updatedAt=1752597866505', alt: '' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0009.jpg?updatedAt=1752597859014', alt: '' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0009.jpg?updatedAt=1752597872404', alt: '' }
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0006.jpg?updatedAt=1752597870309', alt: 'Farmers inspecting banana crops' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0005.jpg?updatedAt=1752597869555', alt: 'Banana processing facility' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0004.jpg?updatedAt=1752597868462', alt: 'Banana farmer with harvest' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0003.jpg?updatedAt=1752597867998', alt: 'Youth training program' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0018.jpg?updatedAt=1752597866529', alt: 'Women entrepreneurs in banana textile production' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0019.jpg?updatedAt=1752597866505', alt: 'Community meeting on sustainable farming' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0009.jpg?updatedAt=1752597859014', alt: 'Banana products display' },
+        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0009.jpg?updatedAt=1752597872404', alt: 'Agricultural training session' }
     ];
     let currentIndex = 0;
 
@@ -71,6 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryModalImg.src = galleryImages[index].src;
         galleryModalImg.alt = galleryImages[index].alt;
         galleryModal.style.display = 'flex';
+        
+        // Add loading indicator
+        galleryModalImg.classList.add('loading');
+        galleryModalImg.onload = function() {
+            galleryModalImg.classList.remove('loading');
+        };
+        galleryModalImg.onerror = function() {
+            galleryModalImg.classList.remove('loading');
+            galleryModalImg.alt = 'Image failed to load';
+            console.error('Failed to load image:', galleryImages[index].src);
+        };
     }
 
     if (galleryLinks.length && galleryModal && galleryModalImg && galleryModalClose && galleryModalPrev && galleryModalNext) {
@@ -113,30 +126,38 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    // Gallery teaser modal logic
+    // Gallery teaser modal logic - use the same modal as gallery
     const teaserLinks = document.querySelectorAll('.gallery-teaser-link');
-    const modal = document.getElementById('gallery-modal');
-    const modalImg = document.getElementById('gallery-modal-img');
-    const modalClose = document.getElementById('gallery-modal-close');
 
-    if (teaserLinks.length && modal && modalImg && modalClose) {
+    if (teaserLinks.length && galleryModal && galleryModalImg && galleryModalClose) {
         teaserLinks.forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
-                modalImg.src = this.getAttribute('data-img');
-                modalImg.alt = this.getAttribute('data-alt');
-                modal.style.display = 'flex';
+                const imgSrc = this.getAttribute('data-img');
+                const imgAlt = this.getAttribute('data-alt') || 'Gallery image';
+                
+                // Find image index if it exists in gallery array, otherwise use direct source
+                const imgIndex = galleryImages.findIndex(img => img.src === imgSrc);
+                if (imgIndex >= 0) {
+                    showGalleryModal(imgIndex);
+                } else {
+                    // Direct display for images not in the gallery array
+                    galleryModalImg.src = imgSrc;
+                    galleryModalImg.alt = imgAlt;
+                    galleryModal.style.display = 'flex';
+                    
+                    // Add loading indicator
+                    galleryModalImg.classList.add('loading');
+                    galleryModalImg.onload = function() {
+                        galleryModalImg.classList.remove('loading');
+                    };
+                    galleryModalImg.onerror = function() {
+                        galleryModalImg.classList.remove('loading');
+                        galleryModalImg.alt = 'Image failed to load';
+                        console.error('Failed to load image:', imgSrc);
+                    };
+                }
             });
-        });
-        modalClose.addEventListener('click', function() {
-            modal.style.display = 'none';
-            modalImg.src = '';
-        });
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                modalImg.src = '';
-            }
         });
     }
     // Mobile menu toggle
@@ -182,8 +203,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Scroll animation trigger
+    // Scroll animation trigger with debounce for performance
     const animateElements = document.querySelectorAll('.animate-on-scroll');
+    
+    // Debounce function to limit execution frequency
+    function debounce(func, wait = 20, immediate = true) {
+        let timeout;
+        return function() {
+            const context = this, args = arguments;
+            const later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    }
     
     function checkScroll() {
         animateElements.forEach(element => {
@@ -199,25 +236,44 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial check
     checkScroll();
     
-    // Check on scroll
-    window.addEventListener('scroll', checkScroll);
+    // Check on scroll with debounce
+    window.addEventListener('scroll', debounce(checkScroll, 15));
 
-    // Animated counter for stats
+    // Animated counter for stats - optimized for performance
     const counters = document.querySelectorAll('.stat-number');
     const speed = 200;
+    
+    function animateCounter(counter, timestamp, startTime, startValue, endValue, duration) {
+        if (!startTime) {
+            startTime = timestamp;
+            startValue = 0;
+        }
+        
+        // Calculate progress
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Calculate current count value
+        const currentValue = Math.floor(startValue + (endValue - startValue) * progress);
+        counter.innerText = currentValue;
+        
+        // Continue animation if not complete
+        if (progress < 1) {
+            requestAnimationFrame((newTimestamp) => 
+                animateCounter(counter, newTimestamp, startTime, startValue, endValue, duration)
+            );
+        } else {
+            counter.innerText = endValue;
+        }
+    }
     
     function animateCounters() {
         counters.forEach(counter => {
             const target = +counter.getAttribute('data-count');
-            const count = +counter.innerText;
-            const increment = target / speed;
-            
-            if (count < target) {
-                counter.innerText = Math.ceil(count + increment);
-                setTimeout(animateCounters, 1);
-            } else {
-                counter.innerText = target;
-            }
+            // Use requestAnimationFrame for smoother animation
+            requestAnimationFrame((timestamp) => 
+                animateCounter(counter, timestamp, null, 0, target, 1500)
+            );
         });
     }
     
@@ -240,6 +296,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 top: window.innerHeight,
                 behavior: 'smooth'
             });
+        });
+    }
+    
+    // Newsletter form submission
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Thank you for subscribing!');
+            newsletterForm.reset();
         });
     }
 });
