@@ -1249,15 +1249,8 @@ section {
 
 /* Projects Section */
 .project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-/* Our Projects Section - Moved from index.html */
-.project-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2.5rem;
     margin: 0 auto;
     max-width: 1400px;
