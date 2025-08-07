@@ -139,6 +139,100 @@
   list-style-type: none;
 }
 
+.disabled-link {
+  color: #aaa !important;
+  cursor: not-allowed;
+  text-decoration: none !important;
+}
+
+/* Gallery-specific styles for beautiful grid and animation */
+.gallery-section {
+  background: var(--light-bg);
+  padding: 4rem 0 2.5rem 0;
+}
+.gallery-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-green);
+  margin-bottom: 2.2rem;
+  position: relative;
+}
+.gallery-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 4px;
+  background: var(--banana-yellow);
+  border-radius: 2px;
+}
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2.2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.gallery-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+  overflow: hidden;
+  transition: var(--transition);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInUp 1.2s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+.gallery-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.13);
+}
+.gallery-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  height: auto;
+  min-height: 340px;
+  max-height: 480px;
+  object-fit: cover;
+  border-bottom: 2px solid var(--banana-yellow);
+  transition: filter 0.3s;
+  max-width: 100%;
+  border-radius: 0;
+  background: #f7f7f7;
+  display: block;
+}
+.gallery-card:hover .gallery-img {
+  filter: brightness(0.93) saturate(1.15);
+}
+.gallery-caption {
+  padding: 1.1rem 1.2rem 0.7rem 1.2rem;
+  text-align: center;
+  font-size: 1.08rem;
+  color: var(--primary-green);
+  font-weight: 500;
+}
+@media (max-width: 700px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+  .gallery-img {
+    aspect-ratio: 16/9;
+    height: auto;
+    border-radius: 10px;
+  }
+  .gallery-title { font-size: 2rem; }
+}
+@media (max-width: 480px) {
+  .gallery-img {
+    aspect-ratio: 16/9;
+    height: auto;
+  }
+}
+
 .mission-list li {
   margin-bottom: 1em;
   position: relative;
@@ -1249,15 +1343,8 @@ section {
 
 /* Projects Section */
 .project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-/* Our Projects Section - Moved from index.html */
-.project-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2.5rem;
     margin: 0 auto;
     max-width: 1400px;

@@ -1,20 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Animate on scroll for gallery teaser images
-    const galleryTeaserLinks = document.querySelectorAll('.gallery-teaser-link.animate-on-scroll');
-    if (galleryTeaserLinks.length) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-        galleryTeaserLinks.forEach(link => {
-            observer.observe(link);
-        });
-    }
-
     // Keyboard accessibility for gallery teaser images
+    const galleryTeaserLinks = document.querySelectorAll('.gallery-teaser-link.animate-on-scroll');
     if (galleryTeaserLinks.length) {
         galleryTeaserLinks.forEach(link => {
             link.addEventListener('keydown', function(e) {
@@ -23,20 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     link.click();
                 }
             });
-        });
-    }
-    // Animate on scroll for project cards (moved from index.html)
-    const projectCards = document.querySelectorAll('.project-card.animate-on-scroll');
-    if (projectCards.length) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-        projectCards.forEach(card => {
-            observer.observe(card);
         });
     }
     // ...existing code...
@@ -91,6 +63,15 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const idx = parseInt(this.getAttribute('data-index'));
+                const fullSrc = this.getAttribute('data-full-src');
+                const altText = this.querySelector('img').getAttribute('alt');
+
+                // Temporarily update the galleryImages array for the modal to use
+                // This is a simple way to handle it without a major refactor
+                if (fullSrc) {
+                    galleryImages[idx] = { src: fullSrc, alt: altText };
+                }
+
                 showGalleryModal(idx);
             });
         });
