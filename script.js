@@ -63,6 +63,15 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const idx = parseInt(this.getAttribute('data-index'));
+                const fullSrc = this.getAttribute('data-full-src');
+                const altText = this.querySelector('img').getAttribute('alt');
+
+                // Temporarily update the galleryImages array for the modal to use
+                // This is a simple way to handle it without a major refactor
+                if (fullSrc) {
+                    galleryImages[idx] = { src: fullSrc, alt: altText };
+                }
+
                 showGalleryModal(idx);
             });
         });
