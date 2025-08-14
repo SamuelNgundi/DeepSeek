@@ -19,25 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const galleryModalPrev = document.getElementById('gallery-modal-prev');
     const galleryModalNext = document.getElementById('gallery-modal-next');
 
-    // Array of images and alt text for navigation
-    const galleryImages = [
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250714-WA0003.jpg?updatedAt=1752597878323', alt: 'Bananas' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0017.jpg?updatedAt=1752597866229', alt: 'Farmers Training' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0007.jpg?updatedAt=1752597870855', alt: 'Banana Ripening Centre' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250713-WA0005.jpg?updatedAt=1752597875338', alt: 'Smart Banana Farming' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250714-WA0004.jpg?updatedAt=1752597879703', alt: 'Fibre Extraction' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0002.jpg?updatedAt=1752597858575', alt: 'Ripening Centre' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250713-WA0003.jpg?updatedAt=1752597873095', alt: 'Sustainability' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0008.jpg?updatedAt=1752597871373', alt: 'Hon. Gathoni Wamuchomba' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0006.jpg?updatedAt=1752597870309', alt: 'Farmers inspecting banana crops' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0005.jpg?updatedAt=1752597869555', alt: 'Banana processing facility' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0004.jpg?updatedAt=1752597868462', alt: 'Banana farmer with harvest' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0003.jpg?updatedAt=1752597867998', alt: 'Youth training program' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0018.jpg?updatedAt=1752597866529', alt: 'Women entrepreneurs in banana textile production' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0019.jpg?updatedAt=1752597866505', alt: 'Community meeting on sustainable farming' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250622-WA0009.jpg?updatedAt=1752597859014', alt: 'Banana products display' },
-        { src: 'https://ik.imagekit.io/bansoko/Images/IMG-20250712-WA0009.jpg?updatedAt=1752597872404', alt: 'Agricultural training session' }
-    ];
+    let galleryImages = [];
     let currentIndex = 0;
 
     function showGalleryModal(index) {
@@ -59,22 +41,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (galleryLinks.length && galleryModal && galleryModalImg && galleryModalClose && galleryModalPrev && galleryModalNext) {
-        galleryLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const idx = parseInt(this.getAttribute('data-index'));
-                const fullSrc = this.getAttribute('data-full-src');
-                const altText = this.querySelector('img').getAttribute('alt');
+        fetch('gallery-images.json')
+            .then(response => response.json())
+            .then(data => {
+                galleryImages = data;
+                galleryLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const idx = parseInt(this.getAttribute('data-index'));
+                        showGalleryModal(idx);
+                    });
+                });
+            })
+            .catch(error => console.error('Error fetching gallery images:', error));
 
-                // Temporarily update the galleryImages array for the modal to use
-                // This is a simple way to handle it without a major refactor
-                if (fullSrc) {
-                    galleryImages[idx] = { src: fullSrc, alt: altText };
-                }
-
-                showGalleryModal(idx);
-            });
-        });
         galleryModalClose.addEventListener('click', function() {
             galleryModal.style.display = 'none';
             galleryModalImg.src = '';
@@ -117,17 +97,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const imgSrc = this.getAttribute('data-img');
                 const imgAlt = this.getAttribute('data-alt') || 'Gallery image';
                 
-                // Find image index if it exists in gallery array, otherwise use direct source
                 const imgIndex = galleryImages.findIndex(img => img.src === imgSrc);
                 if (imgIndex >= 0) {
                     showGalleryModal(imgIndex);
                 } else {
-                    // Direct display for images not in the gallery array
                     galleryModalImg.src = imgSrc;
                     galleryModalImg.alt = imgAlt;
                     galleryModal.style.display = 'flex';
                     
-                    // Add loading indicator
                     galleryModalImg.classList.add('loading');
                     galleryModalImg.onload = function() {
                         galleryModalImg.classList.remove('loading');
@@ -184,41 +161,26 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Scroll animation trigger with debounce for performance
+    // Scroll animation trigger with IntersectionObserver
     const animateElements = document.querySelectorAll('.animate-on-scroll');
-    
-    // Debounce function to limit execution frequency
-    function debounce(func, wait = 20, immediate = true) {
-        let timeout;
-        return function() {
-            const context = this, args = arguments;
-            const later = function() {
-                timeout = null;
-                if (!immediate) func.apply(context, args);
-            };
-            const callNow = immediate && !timeout;
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-            if (callNow) func.apply(context, args);
-        };
-    }
-    
-    function checkScroll() {
-        animateElements.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            
-            if (elementTop < windowHeight - 100) {
-                element.classList.add('animated');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animated');
+                observer.unobserve(entry.target);
             }
         });
-    }
-    
-    // Initial check
-    checkScroll();
-    
-    // Check on scroll with debounce
-    window.addEventListener('scroll', debounce(checkScroll, 15));
+    }, observerOptions);
+
+    animateElements.forEach(element => {
+        observer.observe(element);
+    });
 
     // Animated counter for stats - optimized for performance
     const counters = document.querySelectorAll('.stat-number');
