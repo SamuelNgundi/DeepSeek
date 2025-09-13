@@ -2325,3 +2325,240 @@ footer::before {
     transform: none !important;
   }
 }
+
+/* Projects Page Specific Styles */
+/* Hero Section Styles */
+.projects-hero-bg {
+  background-image: url('images/banana-plantations-githunguri.jpg');
+}
+
+.projects-hero-subtitle {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--banana-yellow);
+}
+
+/* Introduction Section Styles */
+.projects-intro-section {
+  max-width: 1200px;
+  width: 95%;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.projects-intro-text-large {
+  font-size: 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+.projects-intro-text-medium {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.projects-highlights-margin {
+  margin-top: 2rem;
+}
+
+.projects-highlight-icon-green {
+  color: var(--accent-green);
+}
+
+.projects-highlight-icon-yellow {
+  color: var(--banana-yellow);
+}
+
+.projects-highlight-icon-orange {
+  color: var(--warm-orange);
+}
+
+/* Main Projects Section Styles */
+.projects-main-section {
+  max-width: 1200px;
+  width: 95%;
+  border-radius: 8px;
+  margin-top: 3rem;
+}
+
+.projects-block-spacing {
+  margin-bottom: 3rem;
+}
+
+.projects-title-yellow {
+  color: var(--banana-yellow);
+  margin-bottom: 1rem;
+}
+
+.projects-title-green {
+  color: var(--accent-green);
+  margin-bottom: 1rem;
+}
+
+.projects-emoji-large {
+  font-size: 1.5em;
+}
+
+.projects-text-large {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.projects-text-medium {
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.projects-list-spacing {
+  margin-left: 1.2em;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+
+.projects-result-text {
+  font-size: 1.05rem;
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.projects-benefit-text {
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+}
+
+.projects-empowerment-text {
+  font-size: 1.05rem;
+  margin-bottom: 1.5rem;
+  color: var(--warm-orange);
+  font-weight: 600;
+}
+
+.projects-image-responsive {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+/* Fiber Products Section */
+.projects-fiber-products {
+  margin-top: 2rem;
+}
+
+.projects-fiber-title {
+  color: var(--primary-green);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.projects-fiber-icon-green {
+  color: var(--accent-green);
+}
+
+.projects-fiber-icon-yellow {
+  color: var(--banana-yellow);
+}
+
+.projects-fiber-icon-orange {
+  color: var(--warm-orange);
+}
+
+/* Objectives Section */
+.projects-objectives-section {
+  max-width: 1200px;
+  width: 95%;
+  border-radius: 8px;
+  margin-top: 3rem;
+  background: var(--light-bg);
+  padding: 2rem;
+}
+
+.projects-objective-icon {
+  font-size: 2.5rem;
+}
+
+.projects-objective-icon-green {
+  color: var(--accent-green);
+  font-size: 2.5rem;
+}
+
+.projects-objective-icon-yellow {
+  color: var(--banana-yellow);
+  font-size: 2.5rem;
+}
+
+.projects-objective-icon-orange {
+  color: var(--warm-orange);
+  font-size: 2.5rem;
+}
+
+/* Methodology Section */
+.projects-methodology-section {
+  max-width: 1200px;
+  width: 95%;
+  border-radius: 8px;
+  margin-top: 3rem;
+}
+
+.projects-methodology-text {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.projects-methodology-list {
+  margin-left: 1.2em;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* Impact Section */
+.projects-impact-section {
+  max-width: 1200px;
+  width: 95%;
+  border-radius: 8px;
+  margin-top: 3rem;
+}
+
+.projects-impact-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Final CTA Section */
+.projects-final-cta {
+  max-width: 1200px;
+  width: 95%;
+  border-radius: 8px;
+  margin-top: 3rem;
+  text-align: center;
+  background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-green) 100%);
+  color: white;
+  padding: 3rem 2rem;
+}
+
+.projects-cta-title {
+  color: var(--banana-yellow);
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+}
+
+.projects-cta-text {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: white;
+}
+
+/* Footer Styles */
+.footer-address-text {
+  font-size: 0.97em;
+  color: var(--banana-yellow);
+}
+
+.footer-legal-link {
+  margin-right: 1.2rem;
+  color: var(--banana-yellow);
+}
+
+.footer-legal-link:last-child {
+  margin-right: 0;
+  color: var(--banana-yellow);
+}
